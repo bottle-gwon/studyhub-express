@@ -1,36 +1,36 @@
 {
-    "name": "studyhub-express",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "nodemon --exec \"node --loader ts-node/esm\" ./src/server.ts",
-        "lint": "eslint src",
-        "lint:fix": "eslint src --fix",
-            "format": "prettier --write --cache .",
-        "build": "tsc"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "type": "module",
-    "devDependencies": {
-        "@eslint/js": "^9.38.0",
-        "@types/cors": "^2.8.19",
-        "@types/express": "^5.0.5",
-        "eslint": "^9.38.0",
-        "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-prettier": "^5.5.4",
-        "globals": "^16.4.0",
-        "nodemon": "^3.1.10",
-        "prettier": "^3.6.2",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.9.3",
-        "typescript-eslint": "^8.46.2"
-    },
-    "dependencies": {
-        "cors": "^2.8.5",
-        "express": "^5.1.0"
-    }
+  "name": "studyhub-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec \"node --loader ts-node/esm\" ./src/server.ts",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write --cache .",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
 }
