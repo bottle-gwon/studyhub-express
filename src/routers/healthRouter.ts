@@ -6,7 +6,7 @@ healthRouter.get('/', async (_req, res) => {
   res.status(200).send('---- Welcome!')
 })
 
-healthRouter.get('/checkhealth', async (_req, res) => {
+healthRouter.get('/health', async (_req, res) => {
   res.status(200).json({ message: '----- health good' })
 })
 
