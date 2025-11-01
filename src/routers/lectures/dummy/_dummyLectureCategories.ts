@@ -1,4 +1,4 @@
-import type { LectureCategory } from '../../../interfaces/_lecturesInterfaces.js'
+import type { LectureCategory } from '@/interfaces/_lecturesInterfaces.js'
 
 const dummyLectureCategories: LectureCategory[] = [
   {

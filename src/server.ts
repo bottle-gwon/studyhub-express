@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 // NOTE: 임포트는 항상 js로 해주세요
-import healthRouter from './routers/healthRouter.js'
 import lecturesRouter from './routers/lectures/lecturesRouter.js'
+import healthRouter from './routers/health/healthRouter.js'
 
 const app = express()
 app.use(express.json())
