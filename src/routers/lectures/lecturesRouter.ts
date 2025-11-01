@@ -1,3 +1,4 @@
+import fs from 'fs'
 import express from 'express'
 import dummyLectures from './dummy/_dummyLectures.js'
 import dummyLecturesRecommended from './dummy/_dummyLecturesRecommended.js'
@@ -29,6 +30,53 @@ lecturesRouter.get('/', async (req, res) => {
 
 lecturesRouter.get('/categories', async (_req, res) => {
   res.status(200).json(dummyLectureCategories)
+})
+
+lecturesRouter.post('/bookmarks', async (req, res) => {
+  const { lecture_id } = req.body
+
+  const targetLecture = dummyLectures.find(
+    (lecture) => lecture.uuid === lecture_id
+  )
+
+  if (!targetLecture) {
+    res.status(404).json({
+      error: '해당 강의를 찾을 수 없습니다.',
+    })
+    return
+  }
+
+  if (targetLecture.is_bookmarked) {
+    res.status(400).json({
+      error: '이미 북마크한 강의입니다.',
+    })
+    return
+  }
+
+  targetLecture.is_bookmarked = true
+  const newArray = dummyLectures.map((lecture) =>
+    lecture.uuid === targetLecture.uuid ? targetLecture : lecture
+  )
+  const newContent = ` import { penguinImageUrl } from '../../../constants/imageUrls.js'
+import { lectureUrl } from '../../../constants/linkUrls.js'
+import type { Lecture } from '../../../interfaces/_lecturesInterfaces.js'
+
+const dummyLectures: Lecture[] = ${JSON.stringify(newArray, null, 2)}
+
+export default dummyLectures `
+
+  const path = [
+    process.cwd(),
+    '/src/routers/lectures/dummy/_dummyLectures.ts',
+  ].join('')
+  console.log({ path })
+
+  fs.writeFileSync(path, newContent, 'utf8')
+
+  res.status(200).json({
+    detail: '북마크가 추가되었습니다',
+  })
+  return
 })
 
 export default lecturesRouter
