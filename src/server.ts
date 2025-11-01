@@ -16,9 +16,13 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 )
-// app.use("/health", healthRouter);
-// app.use("/auth", progressRouter);
-app.use('/lectures', lecturesRouter) // lectures router 안의 라우트들은 `/lectures`를 떼고 쓰면 됩니다
-app.use('/', healthRouter) // 마지막에 있어야 합니다
+
+// NOTE: 사용하실 라우터를 만들어 여기에 부착하시면 됩니다
+// NOTE: `/src/lectures/lecturesRouter`를 참고해주세요
+
+// NOTE: `/lectures`로 시작하는 엔드포인트들은 모두 lecturesRouter로 넘어갑니다.
+// NOTE:  넘어간 이후엔 `/lectures`를 제외한 엔드포인트만 쓰시면 됩니다
+app.use('/lectures', lecturesRouter)
+app.use('/', healthRouter) // NOTE: 이 라우터는 가장 마지막에 있어야 합니다
 
 app.listen(3000, () => console.log('----server is on 3000'))
