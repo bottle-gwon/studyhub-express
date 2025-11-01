@@ -26,7 +26,7 @@ const dummyLectures: Lecture[] = [
     average_rating: 4.75,
     duration: 600,
     url_link: 'https://inflearn.com/course/django-guide',
-    is_bookmarked: true,
+    is_bookmarked: false,
   },
   {
     uuid: '550e8400-e29b-41d4-a716-446655440001',
