@@ -44,7 +44,7 @@ recruitRouter.get('/tags', async (req, res) => {
 recruitRouter.post('/tags', async (req, res) => {
   // const isLoggedIn = Boolean(req.headers.authorization)
 
-  const recruitment_id = Number(req.body.recruitment_id) // 이거 있을 필요 없는데 문서상 존재해서 작성
+  const recruitment_id = Number(req.body.recruitment_id ?? 101) // 이거 있을 필요 없는데 문서상 존재해서 작성
   const tags = req.body.tags ?? [''] // 하나씩 추가 하는거라 이것도 배열일 필요 없음
 
   const search = dummyTagArray.filter((tag) => tags.includes(tag.name))
