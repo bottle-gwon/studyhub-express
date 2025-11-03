@@ -40,4 +40,32 @@ recruitRouter.get('/tags', async (req, res) => {
   res.status(200).json(response)
 })
 
+// 아직 요청 한거 덜 고친거 같아서 이부분은 임시 입니다.
+recruitRouter.post('/tags', async (req, res) => {
+  // const isLoggedIn = Boolean(req.headers.authorization)
+
+  const recruitment_id = Number(req.body.recruitment_id) // 이거 있을 필요 없는데 문서상 존재해서 작성
+  const tags = req.body.tags ?? [''] // 하나씩 추가 하는거라 이것도 배열일 필요 없음
+
+  const search = dummyTagArray.filter((tag) => tags.includes(tag.name))
+
+  // 1초 딜레이
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+
+  // if (!isLoggedIn) {
+  //   res.status(401).json({ detail: '로그인이 필요한 기능입니다.' })
+  // }
+
+  if (search.length === 0) {
+    const response = {
+      recruitment_id: recruitment_id, // 있을 필요 없음
+      added_tags: tags,
+      message: '태그가 정상적으로 추가 되었습니다.',
+    }
+    res.status(201).json(response)
+  }
+
+  res.status(409).json({ detail: '이미 존재하는 태그입니다.' })
+})
+
 export default recruitRouter
