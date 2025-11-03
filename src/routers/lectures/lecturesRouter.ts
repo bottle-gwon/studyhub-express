@@ -18,29 +18,22 @@ const lecturesRouter = express.Router()
 lecturesRouter.get('/', async (req, res) => {
   const isLoggedIn = Boolean(req.headers.authorization)
   const page = Number(req.query.page ?? 0)
-  const search = req.query.search ? String(req.query.search) : undefined
-  const category = req.query.category ? String(req.query.category) : undefined
-  const ordering = req.query.ordering ? String(req.query.ordering) : undefined
+  const search = String(req.query.search ?? '')
+  const category = String(req.query.category ?? '')
+  const ordering = String(req.query.ordering ?? '')
 
   const filteredArray = dummyLectures
-    .filter((lecture) => {
-      if (!search) {
-        return true
-      }
-      return (
+    .filter(
+      (lecture) =>
         lecture.title.includes(search) || lecture.instructor.includes(search)
-      )
-    })
-    .filter((lecture) => {
-      if (!category) {
-        return true
-      }
-      return lecture.categories.find((el) => el.name === category)
-    })
+    )
+    .filter((lecture) =>
+      lecture.categories.find((el) => (category ? el.name === category : true))
+    )
     .sort((a, b) => {
       switch (ordering) {
         case '-created_at': // 최신순
-          return 1
+          return 1 // api로는 생성일 접근 불가
         case '-price': // 가격 높은 순
           return b.discount_price - a.discount_price
         case 'price': // 가격 낮은 순
@@ -53,6 +46,7 @@ lecturesRouter.get('/', async (req, res) => {
           return 1 // 그 외엔 넘어감
       }
     })
+  console.log({ filteredArray })
   const slicedLectureArray = filteredArray.slice(page * 3, (page + 1) * 3)
 
   const response = {
