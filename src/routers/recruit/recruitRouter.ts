@@ -1,8 +1,29 @@
 import express from 'express'
 import dummyTagArray from './dummy/_dummyRecruitTagSearch.js'
+import { dummyRecruitArray } from './dummy/_dummyRecruitList.js'
 
 // /recruitments
 const recruitRouter = express.Router()
+
+recruitRouter.get('/', async (req, res) => {
+  const isLoggedIn = Boolean(req.headers.authorization)
+  const page = Number(req.query.page ?? 1)
+  const page_size = Number(req.query.page_size ?? 10)
+
+  const startIndex = (page - 1) * page_size
+  const endeIndex = startIndex + page_size
+
+  const slicedRecruitArray = dummyRecruitArray.slice(startIndex, endeIndex)
+
+  const response = {
+    results: slicedRecruitArray,
+    page: page,
+    page_size: page_size,
+    total_count: dummyRecruitArray.length,
+  }
+
+  res.status(200).json(response)
+})
 
 recruitRouter.get('/tags', async (req, res) => {
   // const isLoggedIn = Boolean(req.headers.authorization)
