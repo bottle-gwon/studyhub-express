@@ -3,6 +3,7 @@ import cors from 'cors'
 // NOTE: 임포트는 항상 js로 해주세요
 import lecturesRouter from './routers/lectures/lecturesRouter.js'
 import healthRouter from './routers/health/healthRouter.js'
+import recruitRouter from './routers/recruit/recruitRouter.js'
 
 const app = express()
 app.use(express.json())
@@ -23,6 +24,7 @@ app.use(
 // NOTE: `/lectures`로 시작하는 엔드포인트들은 모두 lecturesRouter로 넘어갑니다.
 // NOTE:  넘어간 이후엔 `/lectures`를 제외한 엔드포인트만 쓰시면 됩니다
 app.use('/lectures', lecturesRouter)
+app.use('/recruitments', recruitRouter)
 app.use('/', healthRouter) // NOTE: 이 라우터는 가장 마지막에 있어야 합니다
 
 app.listen(3000, () => console.log('----server is on 3000'))

@@ -1,0 +1,36 @@
+import type { Tag } from '@/interfaces/_tags.js'
+
+const dummyTagArray: Tag[] = [
+  { id: 1, name: 'Python' },
+  { id: 2, name: 'AI' },
+  { id: 3, name: '딥러닝' },
+  { id: 4, name: 'React' },
+  { id: 5, name: 'TypeScript' },
+  { id: 6, name: '프론트엔드' },
+  { id: 7, name: '백엔드' },
+  { id: 8, name: '데이터베이스' },
+  { id: 9, name: '클라우드' },
+  { id: 10, name: 'DevOps' },
+  { id: 11, name: '머신러닝' },
+  { id: 12, name: '데이터 과학' },
+  { id: 13, name: '웹 개발' },
+  { id: 14, name: '모바일 앱' },
+  { id: 15, name: 'UI/UX' },
+  { id: 16, name: '알고리즘' },
+  { id: 17, name: '자료구조' },
+  { id: 18, name: '보안' },
+  { id: 19, name: '블록체인' },
+  { id: 20, name: '게임 개발' },
+  { id: 21, name: '테스팅' },
+  { id: 22, name: '애자일' },
+  { id: 23, name: '스크럼' },
+  { id: 24, name: '프로젝트 관리' },
+  { id: 25, name: '커뮤니케이션' },
+  { id: 26, name: '리더십' },
+  { id: 27, name: '문제 해결' },
+  { id: 28, name: '비판적 사고' },
+  { id: 29, name: '팀워크' },
+  { id: 30, name: '클린 코드' },
+]
+
+export default dummyTagArray
