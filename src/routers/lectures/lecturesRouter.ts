@@ -18,7 +18,42 @@ const lecturesRouter = express.Router()
 lecturesRouter.get('/', async (req, res) => {
   const isLoggedIn = Boolean(req.headers.authorization)
   const page = Number(req.query.page ?? 0)
-  const slicedLectureArray = dummyLectures.slice(page * 3, (page + 1) * 3)
+  const search = req.query.search ? String(req.query.search) : undefined
+  const category = req.query.category ? String(req.query.category) : undefined
+  const ordering = req.query.ordering ? String(req.query.ordering) : undefined
+
+  const filteredArray = dummyLectures
+    .filter((lecture) => {
+      if (!search) {
+        return true
+      }
+      return (
+        lecture.title.includes(search) || lecture.instructor.includes(search)
+      )
+    })
+    .filter((lecture) => {
+      if (!category) {
+        return true
+      }
+      return lecture.categories.find((el) => el.name === category)
+    })
+    .sort((a, b) => {
+      switch (ordering) {
+        case '-created_at': // 최신순
+          return 1
+        case '-price': // 가격 높은 순
+          return b.discount_price - a.discount_price
+        case 'price': // 가격 낮은 순
+          return a.discount_price - b.discount_price
+        case '-rating': // 평점 높은 순
+          return b.average_rating - a.average_rating
+        case 'raing': // 평점 낮은 순
+          return a.average_rating - b.average_rating
+        default:
+          return 1 // 그 외엔 넘어감
+      }
+    })
+  const slicedLectureArray = filteredArray.slice(page * 3, (page + 1) * 3)
 
   const response = {
     count: 150,
