@@ -30,7 +30,7 @@ export interface Manage {
 
 export type RecruitManageOrdering = 'created_at' | 'bookmarks' | 'views'
 
-export type RecruitManageStatus = '' | 'open' | 'closed'
+export type RecruitManageStatus = 'open' | 'closed'
 
 export const recruitArrangementInTextArray = [
   '최신순',

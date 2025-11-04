@@ -18,7 +18,6 @@ recruitManageRouter.get('/', async (req, res) => {
 
   const filteredRecruitsManageArray = dummyRecruitManage
     .filter((recruit) => {
-      if (condition === '') return true
       if (condition === 'open') return !recruit.is_closed
       if (condition === 'closed') return recruit.is_closed
       return true
