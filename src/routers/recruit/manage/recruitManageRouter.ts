@@ -5,31 +5,32 @@ const recruitManageRouter = express.Router()
 
 recruitManageRouter.get('/', async (req, res) => {
   // 브라우저에서 테스트 시 해당부분 주석
-  const isLoggedIn = Boolean(req.headers.authorization)
+  // const isLoggedIn = Boolean(req.headers.authorization)
 
-  if (!isLoggedIn) {
-    return res.status(400).json({ error: '로그인이 필요합니다.' })
-  }
+  // if (!isLoggedIn) {
+  //     return res.status(400).json({ error: '로그인이 필요합니다.' })
+  // }
   // ------여기까지-------
-  const page = Number(req.query.page ?? 0)
+  const page = Number(req.query.page ?? 1)
+  // api 명세서상 페이지 기본값 1로 1로 진행
   const condition = String(req.query.condition ?? '')
   const arrangement = String(req.query.arrangement ?? '')
 
   const filteredRecruitsManageArray = dummyRecruitManage
     .filter((recruit) => {
-      if (condition === '전체') return true
-      if (condition === '모집중') return !recruit.is_closed
-      if (condition === '마감됨') return recruit.is_closed
+      if (condition === '') return true
+      if (condition === 'open') return !recruit.is_closed
+      if (condition === 'closed') return recruit.is_closed
       return true
     })
 
     .sort((a, b) => {
       switch (arrangement) {
-        case '최신순':
+        case 'created_at':
           return Date.parse(b.created_at) - Date.parse(a.created_at)
-        case '북마크 많은 순':
+        case 'bookmarks':
           return (b.bookmark_count ?? 0) - (a.bookmark_count ?? 0)
-        case '조회수 높은 순':
+        case 'views':
           return (b.views_count ?? 0) - (a.views_count ?? 0)
         default:
           return Date.parse(b.created_at) - Date.parse(a.created_at)
@@ -37,8 +38,8 @@ recruitManageRouter.get('/', async (req, res) => {
     })
   console.log({ filtered: filteredRecruitsManageArray.length })
   const slicedRecruitManageArray = filteredRecruitsManageArray.slice(
-    page * 10,
-    (page + 1) * 10
+    (page - 1) * 10,
+    page * 10
   )
 
   const response = {

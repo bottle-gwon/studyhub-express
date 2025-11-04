@@ -28,6 +28,10 @@ export interface Manage {
   updated_at: string
 }
 
+export type RecruitManageOrdering = 'created_at' | 'bookmarks' | 'views'
+
+export type RecruitManageStatus = '' | 'open' | 'closed'
+
 export const recruitArrangementInTextArray = [
   '최신순',
   '북마크 많은 순',
