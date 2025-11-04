@@ -27,3 +27,15 @@ export interface Manage {
   created_at: string
   updated_at: string
 }
+
+export const recruitArrangementInTextArray = [
+  '최신순',
+  '북마크 많은 순',
+  '조회수 높은 순',
+] as const
+export type RecruitArrangementInText =
+  (typeof recruitArrangementInTextArray)[number]
+
+export const recruitConditionInTextArray = ['전체', '모집중', '마감됨'] as const
+export type RecruitConditionInText =
+  (typeof recruitConditionInTextArray)[number]
