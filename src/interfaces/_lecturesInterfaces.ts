@@ -50,3 +50,10 @@ export const lectureOrderingInTextArray = [
   '평점 낮은 순',
 ] as const
 export type LectureOrderingInText = (typeof lectureOrderingInTextArray)[number]
+
+export interface LectureReview {
+  id: number
+  rating: LectureReviewRating
+  content: string
+  created_at: string
+}

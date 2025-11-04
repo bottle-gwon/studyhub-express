@@ -3,6 +3,7 @@ import dummyLectures from './dummy/_dummyLectures.js'
 import dummyLecturesRecommended from './dummy/_dummyLecturesRecommended.js'
 import dummyLectureCategories from './dummy/_dummyLectureCategories.js'
 import { updateDummyLectures } from './_lecturesOperations.js'
+import type { LectureReview } from '@/interfaces/_lecturesInterfaces.js'
 
 const lecturesRouter = express.Router()
 
@@ -119,6 +120,29 @@ lecturesRouter.delete('/bookmarks/:lecture_id', async (req, res) => {
     detail: '북마크가 삭제되었습니다',
   })
   return
+})
+
+lecturesRouter.get('/:lectureId/reviews', async (req, res) => {
+  const lectureId = req.params.lectureId
+  console.log({ lectureId })
+
+  const reviews: LectureReview[] = [
+    {
+      id: 1,
+      rating: '5_OUT_OF_5_STARS',
+      content:
+        '정말 유익한 강의였습니다. 실무에 바로 적용할 수 있는 내용들이 많았어요.',
+      created_at: '2025-10-10 14:30:00',
+    },
+    {
+      id: 2,
+      rating: '4_OUT_OF_5_STARS',
+      content: '전반적으로 좋았지만 중급자에게는 조금 쉬울 수 있습니다.',
+      created_at: '2025-10-09 09:15:00',
+    },
+  ]
+
+  res.status(200).json({ reviews })
 })
 
 export default lecturesRouter
