@@ -715,8 +715,7 @@ recruitRouter.post(
     (targetManage.bookmark_count ?? 0) + count
   )
 
-  targetManage.is_bookmarked = true
-  updateDummyRecruitManage(targetManage)
+  //서버 저장 시도 했으나, 파일형식 충돌로 공부/해결이 오래걸릴거같아 우선 순위 뒤로 미루기
   res.status(200).json({
     id: targetManage.id,
     title: targetManage.title,
