@@ -8,6 +8,8 @@ import dummyRecruitManage from './manage/dummy/_dummyRecruitManageList.js'
 import dummyRecruitDetailWithBookmark from './dummy/dummyRecruiDetail/_dummyRecruitDetailWithBookmark.js'
 import dummyRecruitDetailBase from './dummy/dummyRecruiDetail/_dummyRecruitDetailBase.js'
 import type { RecruitDetail } from '@/interfaces/_recruitInterfaces.js'
+import dummyRecruitDetailBookmark from './dummy/dummyRecruiDetail/_dummyRecruitDetailBookmark.js'
+import fs from 'fs'
 
 // /recruitments
 const recruitRouter = express.Router()
@@ -257,5 +259,33 @@ recruitRouter.get('/:recruitId/', async (req, res) => {
   console.log({ loggedIn: response })
   res.status(200).json(response)
 })
+
+// NOTE: 공고 세부 페이지의 북마크를 테스트하기 위해선 아래를 수정해야 합니다
+// 1. 위에 있는 공고관리 페이지의 북마크 부분(recruitRouter.post('/:id/bookmark', ...) 전체를 주석처리 합니다
+// 2. 아래의 주석을 해제합니다
+// recruitRouter.post('/:recruitId/bookmark', async (_req, res) => {
+//   const newBookmark = !dummyRecruitDetailBookmark.is_bookmarked
+//
+//   const newContent = ` const dummyRecruitDetailBookmark = {
+//   is_bookmarked: ${newBookmark},
+// }
+//
+// export default dummyRecruitDetailBookmark
+// `
+//   const path = [
+//     process.cwd(),
+//     '/src/routers/recruit/dummy/_dummyRecruitDetailBookmark.ts',
+//   ].join('')
+//   fs.writeFileSync(path, newContent, 'utf8')
+//
+//   const response = {
+//     id: 301,
+//     title: '----not-that-important',
+//     is_bookmarked: newBookmark,
+//     bookmark_count: 5,
+//   }
+//   res.status(200).json(response)
+// })
+// ---- 여기까지
 
 export default recruitRouter
