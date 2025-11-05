@@ -52,14 +52,14 @@ recruitManageRouter.get('/', async (req, res) => {
 })
 
 recruitManageRouter.post('/:id/bookmark', async (req, res) => {
-  const manage_id = Number(req.query.id)
+  const manage_id = Number(req.params.id)
   const targetManage = dummyRecruitManage.find(
     (manage) => manage.id === manage_id
   )
 
   if (!targetManage) {
     res.status(400).json({
-      error: '잘못된 요청입니다.',
+      detail: '잘못된 요청입니다.',
     })
     return
   }
