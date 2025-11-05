@@ -4,6 +4,11 @@ import { dummyGuestRecruitArray } from './dummy/_dummyGuestRecruitList.js'
 import { dummyUserRecruitArray } from './dummy/_dummyUserRecruitList.js'
 import dummyRecruitManage from './manage/dummy/_dummyRecruitManageList.js'
 
+// 하흥주 임포트
+import dummyRecruitDetailWithBookmark from './dummy/dummyRecruiDetail/_dummyRecruitDetailWithBookmark.js'
+import dummyRecruitDetailBase from './dummy/dummyRecruiDetail/_dummyRecruitDetailBase.js'
+import type { RecruitDetail } from '@/interfaces/_recruitInterfaces.js'
+
 // /recruitments
 const recruitRouter = express.Router()
 
@@ -221,6 +226,36 @@ recruitRouter.delete('/:id', async (req, res) => {
     deleted_at: new Date().toISOString(),
   })
   return
+})
+
+// ---- 하흥주 라우트 ----
+recruitRouter.get('/:recruitId/', async (req, res) => {
+  console.log('---- hear')
+  const isLoggedIn = Boolean(req.headers.authorization)
+  console.log({ isLoggedIn })
+  // NOTE: 자기 공고와 남의 공고를 비요할 땐 아래 주석을 바꿔주세요
+  const author_nickname = 'admin'
+  // const dummyAuthorNickname = "not-admin"
+  // ---- 여기까지
+
+  if (!isLoggedIn) {
+    const response: RecruitDetail = {
+      ...dummyRecruitDetailBase,
+      author_nickname,
+      is_bookmarked: false,
+    }
+    console.log({ notLoggedIn: response })
+    res.status(200).json(response)
+    return
+  }
+
+  const response: RecruitDetail = {
+    ...dummyRecruitDetailWithBookmark,
+    author_nickname,
+  }
+
+  console.log({ loggedIn: response })
+  res.status(200).json(response)
 })
 
 export default recruitRouter
