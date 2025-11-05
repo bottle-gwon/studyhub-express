@@ -1,6 +1,7 @@
 import express from 'express'
 import dummyTagArray from './dummy/_dummyRecruitTagSearch.js'
-import { dummyRecruitArray } from './dummy/_dummyRecruitList.js'
+import { dummyGuestRecruitArray } from './dummy/_dummyGuestRecruitList.js'
+import { dummyUserRecruitArray } from './dummy/_dummyUserRecruitList.js'
 
 // /recruitments
 const recruitRouter = express.Router()
@@ -11,15 +12,21 @@ recruitRouter.get('/', async (req, res) => {
   const page_size = Number(req.query.page_size ?? 10)
 
   const startIndex = (page - 1) * page_size
-  const endeIndex = startIndex + page_size
+  const endIndex = startIndex + page_size
+  const sourceData = isLoggedIn
+    ? dummyUserRecruitArray.results
+    : dummyGuestRecruitArray
+  const slicedRecruitArray = sourceData.slice(startIndex, endIndex)
 
-  const slicedRecruitArray = dummyRecruitArray.slice(startIndex, endeIndex)
-
+  // 비로그인 시: 일반 공고만
   const response = {
+    page,
+    page_size,
+    total_count: sourceData.length,
     results: slicedRecruitArray,
-    page: page,
-    page_size: page_size,
-    total_count: dummyRecruitArray.length,
+    ...(isLoggedIn && {
+      recommendations: dummyUserRecruitArray.recommendations,
+    }),
   }
 
   res.status(200).json(response)
