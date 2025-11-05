@@ -32,9 +32,8 @@ recruitRouter.get('/tags', async (req, res) => {
   const page = Number(req.query.page ?? 1)
   const page_size = Number(req.query.page_size ?? 5)
 
-  // 검색 기능 활성화 할때 주석 해제
-  // const filter = dummyTagArray.filter((tag)=> tag.name.includes(keyword))
-  const filter = dummyTagArray
+  // 검색 기능 임시
+  const filter = dummyTagArray.filter((tag) => tag.name.includes(keyword))
 
   const total_count = filter.length
 

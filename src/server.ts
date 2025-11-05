@@ -6,7 +6,6 @@ import healthRouter from './routers/health/healthRouter.js'
 import recruitRouter from './routers/recruit/recruitRouter.js'
 import notificationsRouter from './routers/notifications/notificationsRouters.js'
 
-
 const app = express()
 app.use(express.json())
 app.use(express.text())
