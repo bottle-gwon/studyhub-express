@@ -14,7 +14,7 @@ export default dummyRecruitManage`
 
   const path = [
     process.cwd(),
-    '/scr/routers/recruit/manage/dummy/_dummyRecruitManageList.ts',
+    '/scr/routers/recruit/manage/dummy/_dummyRecruitManageList.js',
   ].join('')
   console.log({ path })
 

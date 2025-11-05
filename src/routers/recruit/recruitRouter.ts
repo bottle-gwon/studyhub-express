@@ -2,6 +2,7 @@ import express from 'express'
 import dummyTagArray from './dummy/_dummyRecruitTagSearch.js'
 import { dummyRecruitArray } from './dummy/_dummyRecruitList.js'
 import dummyRecruitManage from './manage/dummy/_dummyRecruitManageList.js'
+import { updateDummyRecruitManage } from './manage/_recruitManageOperations.js'
 
 // /recruitments
 const recruitRouter = express.Router()
@@ -168,12 +169,15 @@ recruitRouter.post('/:id/bookmark', async (req, res) => {
     (targetManage.bookmark_count ?? 0) + count
   )
 
-  return res.status(200).json({
+  targetManage.is_bookmarked = true
+  updateDummyRecruitManage(targetManage)
+  res.status(200).json({
     id: targetManage.id,
     title: targetManage.title,
     is_bookmarked: targetManage.is_bookmarked,
     bookmark_count: targetManage.bookmark_count,
   })
+  return
 })
 
 export default recruitRouter
