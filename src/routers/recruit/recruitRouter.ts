@@ -715,12 +715,15 @@ recruitRouter.post(
     (targetManage.bookmark_count ?? 0) + count
   )
 
-  return res.status(200).json({
+  targetManage.is_bookmarked = true
+  updateDummyRecruitManage(targetManage)
+  res.status(200).json({
     id: targetManage.id,
     title: targetManage.title,
     is_bookmarked: targetManage.is_bookmarked,
     bookmark_count: targetManage.bookmark_count,
   })
+  return
 })
 
 >>>>>>> 62cb752 (refactor : 앤드포인트 기준 파일 변경 #16)
