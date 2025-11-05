@@ -51,4 +51,34 @@ recruitManageRouter.get('/', async (req, res) => {
   res.status(200).json(response)
 })
 
+recruitManageRouter.post('/:id/bookmark', async (req, res) => {
+  const manage_id = Number(req.query.id)
+  const targetManage = dummyRecruitManage.find(
+    (manage) => manage.id === manage_id
+  )
+
+  if (!targetManage) {
+    res.status(400).json({
+      error: '잘못된 요청입니다.',
+    })
+    return
+  }
+
+  const toggle = !targetManage.is_bookmarked
+  const count = toggle ? 1 : -1
+
+  targetManage.is_bookmarked = toggle
+  targetManage.bookmark_count = Math.max(
+    0,
+    (targetManage.bookmark_count ?? 0) + count
+  )
+
+  return res.status(200).json({
+    id: targetManage.id,
+    title: targetManage.title,
+    is_bookmarked: targetManage.is_bookmarked,
+    bookmark_count: targetManage.bookmark_count,
+  })
+})
+
 export default recruitManageRouter
