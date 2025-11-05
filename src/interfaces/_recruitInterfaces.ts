@@ -13,11 +13,23 @@ export interface Recruit {
   is_closed: boolean
   tags: { id: number; name: string }[]
   lectures: { id: number; title: string; instructor: string }[]
-  study_group: { id: number; uuid: string; name: string }
+  study_group: { id: number; uuid: string; name: string } | null
   author: { id: number; nickname: string; profile_img_url: string }
   is_bookmarked: boolean
   created_at: string
-  updated_at: string
+  updated_at: string | null
+}
+
+export interface RecruitWithAuth extends Recruit {
+  is_bookmarked: boolean
+}
+
+export interface RecruitmentsListResponseWithAuth {
+  recommendations: RecruitWithAuth[]
+  results: RecruitWithAuth[]
+  page: number
+  page_size: number
+  total_count: number
 }
 
 export interface RecruitmentListResponse {
