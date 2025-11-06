@@ -10,3 +10,12 @@ export interface ChatRoomListItem {
   is_read: boolean
   created_at: string
 }
+export interface Message {
+  id: number
+  is_read: boolean
+  content: string
+  sender_nickname: string
+  sender_id: number
+  created_at: string
+  updated_at: string
+}
