@@ -45,4 +45,23 @@ export default dummyNotifications
   res.status(204).json()
 })
 
+notificationsRouter.patch('/read-all', async (_req, res) => {
+  const newNotificationArray = dummyNotifications.map((notification) => ({
+    ...notification,
+    is_read: true,
+  }))
+
+  const newContent = ` import type { Notification } from '@/interfaces/_notificationInterfaces.js'
+
+const dummyNotifications: Notification[] = ${JSON.stringify(newNotificationArray)}
+
+
+export default dummyNotifications
+`
+
+  const path = `${process.cwd()}/src/routers/notifications/_dummyNotifications.ts`
+  fs.writeFileSync(path, newContent, 'utf8')
+
+  res.status(204).json()
+})
 export default notificationsRouter

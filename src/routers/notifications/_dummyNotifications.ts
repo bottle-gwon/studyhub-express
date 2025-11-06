@@ -29,7 +29,7 @@ const dummyNotifications: Notification[] = [
     content:
       '❌ 아쉽게도 "백엔드 신들의 모임" 스터디 신청이 거절되었습니다. 아직 당신의 때가 아닌 것 같네요... 더 수련하고 오세요!',
     type: 'APPLICATION_STATUS_REJECTION',
-    is_read: false,
+    is_read: true,
     back_url_link: 'https://www.google.com',
     created_at: '2025-11-05T16:45:22Z',
     updated_at: '2025-11-05T16:45:22Z',
@@ -51,7 +51,7 @@ const dummyNotifications: Notification[] = [
     content:
       '👀 이준혁님이 당신의 코드 리뷰를 요청했습니다. 메시지: "이 코드가 왜 안되는지 정말 모르겠어요... SOS 🆘"',
     type: 'STUDY_REVIEW_REQUEST',
-    is_read: false,
+    is_read: true,
     back_url_link: 'https://www.google.com',
     created_at: '2025-11-04T18:22:33Z',
     updated_at: '2025-11-04T18:22:33Z',
@@ -73,7 +73,7 @@ const dummyNotifications: Notification[] = [
     content:
       '⏰ 오늘 일정 알림: 오후 7시 "Python 뱀 길들이기" 스터디 모임이 있어요! 늦지 마세요~ (피자와 콜라 준비완료 🍕)',
     type: 'STUDY_SCHEDULE_TODAY',
-    is_read: false,
+    is_read: true,
     back_url_link: 'https://www.google.com',
     created_at: '2025-11-05T10:00:00Z',
     updated_at: '2025-11-05T10:00:00Z',
@@ -95,7 +95,7 @@ const dummyNotifications: Notification[] = [
     content:
       '🔧 시스템 점검 안내: 내일 새벽 2시-4시 서버 업그레이드를 진행합니다. 혹시 새벽에 코딩하시는 올빼미 개발자분들 참고하세요!',
     type: 'SYSTEM',
-    is_read: false,
+    is_read: true,
     back_url_link: 'https://www.google.com',
     created_at: '2025-11-05T13:45:12Z',
     updated_at: '2025-11-05T13:45:12Z',
