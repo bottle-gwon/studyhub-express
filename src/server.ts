@@ -5,6 +5,7 @@ import lecturesRouter from './routers/lectures/lecturesRouter.js'
 import healthRouter from './routers/health/healthRouter.js'
 import recruitRouter from './routers/recruit/recruitRouter.js'
 import notificationsRouter from './routers/notifications/notificationsRouters.js'
+import chatRouter from './routers/chat/chatRouters.js'
 
 const app = express()
 app.use(express.json())
@@ -27,6 +28,7 @@ app.use(
 app.use('/lectures', lecturesRouter)
 app.use('/recruitments', recruitRouter)
 app.use('/notifications', notificationsRouter)
+app.use('/chat', chatRouter)
 app.use('/', healthRouter) // NOTE: 이 라우터는 가장 마지막에 있어야 합니다
 
 app.listen(3000, () => console.log('----server is on 3000'))
