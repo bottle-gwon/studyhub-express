@@ -41,6 +41,8 @@ export interface RecruitmentListResponse {
 
 export type RecruitOrdering = 'created_at' | 'bookmarks' | 'views'
 
+export type RecruitStatus = '' | 'open' | 'closed'
+
 export const recruitArrangementInTextArray = [
   '최신순',
   '북마크 많은 순',
@@ -53,6 +55,17 @@ export type RecruitArrangementInText =
 export const recruitConditionInTextArray = ['전체', '모집중', '마감됨'] as const
 export type RecruitConditionInText =
   (typeof recruitConditionInTextArray)[number]
+
+// ---- recruit manage
+export interface RecruitsManageResponse {
+  count: number
+  status: '' | 'open' | 'closed'
+  ordering: 'created_at' | 'bookmarks' | 'views'
+  page: number
+  page_size: number
+  results: Recruit[]
+  user_nickname: string
+}
 
 // ---- recruit detail
 export interface RecruitDetailAttachment {
