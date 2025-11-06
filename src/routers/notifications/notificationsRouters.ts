@@ -1,6 +1,8 @@
 import type { NotificationsResponseData } from '@/interfaces/index.js'
 import express from 'express'
 import dummyNotifications from './_dummyNotifications.js'
+import fs from 'fs'
+import { cwd } from 'process'
 
 const notificationsRouter = express.Router()
 
@@ -19,6 +21,29 @@ notificationsRouter.get('/', async (req, res) => {
   }
 
   res.status(200).json(response)
+})
+
+notificationsRouter.patch('/:notificationId/read', async (req, res) => {
+  const notificationId = Number(req.params.notificationId || 0)
+
+  const newNotificationArray = dummyNotifications.map((notification) =>
+    notification.id === notificationId
+      ? { ...notification, is_read: !notification.is_read }
+      : notification
+  )
+
+  const newContent = ` import type { Notification } from '@/interfaces/_notificationInterfaces.js'
+
+const dummyNotifications: Notification[] = [${JSON.stringify(newNotificationArray)}]
+
+
+export default dummyNotifications
+`
+
+  const path = `${cwd()}/src/routers/notifications/_dummyNotifications.ts`
+  fs.writeFileSync(path, newContent, 'utf8')
+
+  res.status(204)
 })
 
 export default notificationsRouter
