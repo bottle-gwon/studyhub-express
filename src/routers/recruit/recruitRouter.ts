@@ -160,41 +160,41 @@ recruitRouter.get('/my', async (req, res) => {
 })
 
 //북마크
-// recruitRouter.post('/:id/bookmark', async (req, res) => {
-//   const manage_id = Number(req.params.id)
-//   if (!Number.isFinite(manage_id)) {
-//     return res.status(400).json({ detail: '잘못된 요청입니다.' })
-//   }
-//
-//   const targetManage = dummyRecruitManage.find(
-//     (manage) => manage.id === manage_id
-//   )
-//
-//   if (!targetManage) {
-//     res.status(400).json({
-//       detail: '잘못된 요청입니다.',
-//     })
-//     return
-//   }
-//
-//   const toggle = !targetManage.is_bookmarked
-//   const count = toggle ? 1 : -1
-//
-//   targetManage.is_bookmarked = toggle
-//   targetManage.bookmark_count = Math.max(
-//     0,
-//     (targetManage.bookmark_count ?? 0) + count
-//   )
-//
-//   //서버 저장 시도 했으나, 파일형식 충돌로 공부/해결이 오래걸릴거같아 우선 순위 뒤로 미루기
-//   res.status(200).json({
-//     id: targetManage.id,
-//     title: targetManage.title,
-//     is_bookmarked: targetManage.is_bookmarked,
-//     bookmark_count: targetManage.bookmark_count,
-//   })
-//   return
-// })
+recruitRouter.post('/:id/bookmark', async (req, res) => {
+  const manage_id = Number(req.params.id)
+  if (!Number.isFinite(manage_id)) {
+    return res.status(400).json({ detail: '잘못된 요청입니다.' })
+  }
+
+  const targetManage = dummyRecruitManage.find(
+    (manage) => manage.id === manage_id
+  )
+
+  if (!targetManage) {
+    res.status(400).json({
+      detail: '잘못된 요청입니다.',
+    })
+    return
+  }
+
+  const toggle = !targetManage.is_bookmarked
+  const count = toggle ? 1 : -1
+
+  targetManage.is_bookmarked = toggle
+  targetManage.bookmark_count = Math.max(
+    0,
+    (targetManage.bookmark_count ?? 0) + count
+  )
+
+  //서버 저장 시도 했으나, 파일형식 충돌로 공부/해결이 오래걸릴거같아 우선 순위 뒤로 미루기
+  res.status(200).json({
+    id: targetManage.id,
+    title: targetManage.title,
+    is_bookmarked: targetManage.is_bookmarked,
+    bookmark_count: targetManage.bookmark_count,
+  })
+  return
+})
 
 //카드삭제
 recruitRouter.delete('/:id', async (req, res) => {
@@ -266,30 +266,30 @@ recruitRouter.get('/:recruitId/', async (req, res) => {
 // NOTE: 공고 세부 페이지의 북마크를 테스트하기 위해선 아래를 수정해야 합니다
 // 1. 위에 있는 공고관리 페이지의 북마크 부분(recruitRouter.post('/:id/bookmark', ...) 전체를 주석처리 합니다
 // 2. 아래의 주석을 해제합니다
-recruitRouter.post('/:recruitId/bookmark', async (_req, res) => {
-  const newBookmark = !dummyRecruitDetailBookmark.is_bookmarked
-  console.log({ newBookmark })
-
-  const newContent = ` const dummyRecruitDetailBookmark = {
-  is_bookmarked: ${newBookmark},
-}
-
-export default dummyRecruitDetailBookmark
-`
-  const path = [
-    process.cwd(),
-    '/src/routers/recruit/dummy/dummyRecruitDetail/_dummyRecruitDetailBookmark.ts',
-  ].join('')
-  fs.writeFileSync(path, newContent, 'utf8')
-
-  const response = {
-    id: 301,
-    title: '----not-that-important',
-    is_bookmarked: newBookmark,
-    bookmark_count: 5,
-  }
-  res.status(200).json(response)
-})
+// recruitRouter.post('/:recruitId/bookmark', async (_req, res) => {
+//   const newBookmark = !dummyRecruitDetailBookmark.is_bookmarked
+//   console.log({ newBookmark })
+//
+//   const newContent = ` const dummyRecruitDetailBookmark = {
+//   is_bookmarked: ${newBookmark},
+// }
+//
+// export default dummyRecruitDetailBookmark
+// `
+//   const path = [
+//     process.cwd(),
+//     '/src/routers/recruit/dummy/dummyRecruitDetail/_dummyRecruitDetailBookmark.ts',
+//   ].join('')
+//   fs.writeFileSync(path, newContent, 'utf8')
+//
+//   const response = {
+//     id: 301,
+//     title: '----not-that-important',
+//     is_bookmarked: newBookmark,
+//     bookmark_count: 5,
+//   }
+//   res.status(200).json(response)
+// })
 // ---- 여기까지
 
 export default recruitRouter
