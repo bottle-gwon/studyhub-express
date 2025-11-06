@@ -160,7 +160,7 @@ recruitRouter.get('/my', async (req, res) => {
   res.status(200).json(response)
 })
 
-// 공고 지원자 조회, 공고id로 해당 공고찾는 로직은 제외했습니다
+// 공고 지원자 조회
 recruitRouter.get('/:recruitment_id/applications', async (req, res) => {
   const isLoggedIn = Boolean(req.headers.authorization)
   const page = Number(req.query.page ?? 1)
