@@ -3,6 +3,7 @@ import dummyTagArray from './dummy/_dummyRecruitTagSearch.js'
 import { dummyGuestRecruitArray } from './dummy/_dummyGuestRecruitList.js'
 import { dummyUserRecruitArray } from './dummy/_dummyUserRecruitList.js'
 import dummyRecruitManage from './manage/dummy/_dummyRecruitManageList.js'
+import { dummyApplicantArray } from './dummy/_dummyApplicatList.js'
 
 // 하흥주 임포트
 import dummyRecruitDetailWithBookmark from './dummy/dummyRecruitDetail/_dummyRecruitDetailWithBookmark.js'
@@ -156,6 +157,38 @@ recruitRouter.get('/my', async (req, res) => {
     results: slicedRecruitManageArray,
     user_nickname: '이영수',
   }
+  res.status(200).json(response)
+})
+
+// 공고 지원자 조회, 공고id로 해당 공고찾는 로직은 제외했습니다
+recruitRouter.get('/:recruitment_id/applications', async (req, res) => {
+  const isLoggedIn = Boolean(req.headers.authorization)
+  const page = Number(req.query.page ?? 1)
+  const limit = Number(req.query.limit ?? 10)
+
+  const start = (page - 1) * limit
+  const end = start + limit
+  const slicedApplicantArray = dummyApplicantArray.slice(start, end)
+
+  const total = dummyApplicantArray.length
+  const hasNextPage = end < total
+
+  const response = {
+    count: total,
+    next: hasNextPage
+      ? `/api/v1/recruitment/${req.params.recruitment_id}/applications?page=${page + 1}&limit=${limit}`
+      : null,
+    previous:
+      page > 1
+        ? `/api/v1/recruitment//${req.params.recruitment_id}/applications?page=${page - 1}&limit=${limit}`
+        : null,
+    results: slicedApplicantArray,
+  }
+
+  if (!isLoggedIn) {
+    res.status(401).json({ detail: '로그인이 필요한 기능입니다.' })
+  }
+
   res.status(200).json(response)
 })
 

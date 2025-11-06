@@ -2,3 +2,4 @@
 export * from './_lecturesInterfaces.js'
 export * from './_recruitInterfaces.js'
 export * from './_notificationInterfaces.js'
+export * from './_applicantInterface.js'
