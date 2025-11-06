@@ -115,21 +115,25 @@ recruitRouter.get('/my', async (req, res) => {
   // ------여기까지-------
   const page = Number(req.query.page ?? 1)
   const page_size = Number(req.query.page_size ?? 10)
-  const condition = String(req.query.condition ?? '')
-  const arrangement = String(req.query.arrangement ?? '')
+  const baseUrl = '----not-that-important----/recruits/my/?page='
+  const previous = page === 1 ? null : `${baseUrl}${page - 1}`
+  const next = page > 5 ? null : `${baseUrl}${page + 1}`
+
+  const status = String(req.query.condition ?? '')
+  const ordering = String(req.query.arrangement ?? '')
 
   const startIndex = (page - 1) * page_size
   const endIndex = startIndex + page_size
 
   const filteredRecruitsManageArray = dummyRecruitManage
     .filter((recruit) => {
-      if (condition === 'open') return !recruit.is_closed
-      if (condition === 'closed') return recruit.is_closed
+      if (status === 'open') return !recruit.is_closed
+      if (status === 'closed') return recruit.is_closed
       return true
     })
 
     .sort((a, b) => {
-      switch (arrangement) {
+      switch (ordering) {
         case 'created_at':
           return Date.parse(b.created_at) - Date.parse(a.created_at)
         case 'bookmarks':
@@ -148,12 +152,12 @@ recruitRouter.get('/my', async (req, res) => {
 
   const response = {
     count: filteredRecruitsManageArray.length,
-    // next: '----not-that-important----',
-    // previous: '----not-that-important----',
-    status: condition,
-    ordering: arrangement,
-    page: page,
-    page_size: page_size,
+    previous,
+    next,
+    status,
+    ordering,
+    page,
+    page_size,
     results: slicedRecruitManageArray,
     user_nickname: '이영수',
   }

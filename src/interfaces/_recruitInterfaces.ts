@@ -53,6 +53,7 @@ export type RecruitArrangementInText =
   (typeof recruitArrangementInTextArray)[number]
 
 export const recruitConditionInTextArray = ['전체', '모집중', '마감됨'] as const
+
 export type RecruitConditionInText =
   (typeof recruitConditionInTextArray)[number]
 
