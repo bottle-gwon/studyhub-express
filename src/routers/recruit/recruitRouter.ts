@@ -257,9 +257,6 @@ recruitRouter.get('/:recruitId/', async (req, res) => {
     id: recruitId,
   }
 
-  console.log({ bookmark: response.is_bookmarked })
-  console.log(dummyRecruitDetailBookmark)
-
   res.status(200).json(response)
 })
 
@@ -268,7 +265,6 @@ recruitRouter.get('/:recruitId/', async (req, res) => {
 // 2. 아래의 주석을 해제합니다
 // recruitRouter.post('/:recruitId/bookmark', async (_req, res) => {
 //   const newBookmark = !dummyRecruitDetailBookmark.is_bookmarked
-//   console.log({ newBookmark })
 //
 //   const newContent = ` const dummyRecruitDetailBookmark = {
 //   is_bookmarked: ${newBookmark},
