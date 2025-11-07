@@ -26,7 +26,7 @@ notificationsRouter.get('/', async (req, res) => {
     count: filteredDummy.length,
     previous,
     next,
-    results: dummyNotifications,
+    results: filteredDummy,
   }
 
   res.status(200).json(response)
