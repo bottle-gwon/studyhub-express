@@ -105,7 +105,7 @@ recruitRouter.post('/tags', async (req, res) => {
 })
 
 //---- 공고관리 페이지 ----
-recruitRouter.get('/my', async (req, res) => {
+recruitRouter.get('/:recruitment_id', async (req, res) => {
   // 브라우저에서 테스트 시 해당부분 주석
   // const isLoggedIn = Boolean(req.headers.authorization)
 
@@ -115,9 +115,6 @@ recruitRouter.get('/my', async (req, res) => {
   // ------여기까지-------
   const page = Number(req.query.page ?? 1)
   const page_size = Number(req.query.page_size ?? 10)
-  // const baseUrl = '----not-that-important----/recruits/my/?page='
-  // const previous = page === 1 ? null : `${baseUrl}${page - 1}`
-  // const next = page > 5 ? null : `${baseUrl}${page + 1}`
 
   const status = String(req.query.status ?? '')
   const ordering = String(req.query.ordering ?? 'created_at')
@@ -156,10 +153,14 @@ recruitRouter.get('/my', async (req, res) => {
     endIndex
   )
 
+  const baseUrl = `----not-that-important----/recruitments/:recruitment_id/?status=${status ? status : ''}?ordering=${ordering}&page=`
+  const previous = page === 1 ? null : `${baseUrl}${page - 1}`
+  const next = page > 5 ? null : `${baseUrl}${page + 1}`
+
   const response = {
     count: summaryCounts,
-    // previous,
-    // next,
+    previous,
+    next,
     status,
     ordering,
     page,
