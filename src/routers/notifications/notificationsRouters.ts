@@ -12,7 +12,6 @@ notificationsRouter.get('/', async (req, res) => {
       ? true
       : false
     : null
-  console.log({ is_read })
 
   const filteredDummy = dummyNotifications.filter((notification) =>
     is_read === null ? true : notification.is_read === is_read
