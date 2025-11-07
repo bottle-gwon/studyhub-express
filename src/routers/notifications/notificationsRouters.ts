@@ -7,13 +7,23 @@ const notificationsRouter = express.Router()
 
 notificationsRouter.get('/', async (req, res) => {
   const page = Number(req.query.page ?? 1)
+  const is_read = req.query.is_read
+    ? req.query.is_read === 'true'
+      ? true
+      : false
+    : null
+  console.log({ is_read })
 
-  const baseUrl = '----not-that-important----/notifications/?page='
+  const filteredDummy = dummyNotifications.filter((notification) =>
+    is_read === null ? true : notification.is_read === is_read
+  )
+
+  const baseUrl = `----not-that-important----/notifications/?is_read=${is_read ? is_read : ''}&page=`
   const previous = page === 1 ? null : `${baseUrl}${page - 1}`
-  const next = `${baseUrl}${page + 1}`
+  const next = page > 5 ? null : `${baseUrl}${page + 1}`
 
   const response: NotificationsResponseData = {
-    count: 100,
+    count: filteredDummy.length,
     previous,
     next,
     results: dummyNotifications,
