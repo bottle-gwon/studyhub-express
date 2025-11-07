@@ -2,10 +2,14 @@ import type { NotificationsResponseData } from '@/interfaces/index.js'
 import express from 'express'
 import dummyNotifications from './_dummyNotifications.js'
 import fs from 'fs'
+import { sleep } from '../utils/sleep.js'
 
 const notificationsRouter = express.Router()
 
 notificationsRouter.get('/', async (req, res) => {
+  // NOTE: 스켈레톤 확인용입니다
+  await sleep(1000)
+
   const page = Number(req.query.page ?? 1)
   const is_read = req.query.is_read
     ? req.query.is_read === 'true'
