@@ -153,7 +153,7 @@ recruitRouter.get('/:recruitment_id', async (req, res) => {
     endIndex
   )
 
-  const baseUrl = `----not-that-important----/recruitments/:recruitment_id/?status=${status ? status : ''}?ordering=${ordering}&page=`
+  const baseUrl = `----not-that-important----/recruitments/:user_id/?status=${status ? status : ''}?ordering=${ordering}&page=`
   const previous = page === 1 ? null : `${baseUrl}${page - 1}`
   const next = page > 5 ? null : `${baseUrl}${page + 1}`
 
