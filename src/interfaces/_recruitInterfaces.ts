@@ -59,7 +59,7 @@ export type RecruitConditionInText =
 
 // ---- recruit manage
 export interface RecruitsManageResponse {
-  count: number
+  count: { total: number; open: number; closed: number }
   status: '' | 'open' | 'closed'
   ordering: 'created_at' | 'bookmarks' | 'views'
   page: number

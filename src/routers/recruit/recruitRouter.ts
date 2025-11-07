@@ -115,15 +115,21 @@ recruitRouter.get('/my', async (req, res) => {
   // ------여기까지-------
   const page = Number(req.query.page ?? 1)
   const page_size = Number(req.query.page_size ?? 10)
-  const baseUrl = '----not-that-important----/recruits/my/?page='
-  const previous = page === 1 ? null : `${baseUrl}${page - 1}`
-  const next = page > 5 ? null : `${baseUrl}${page + 1}`
+  // const baseUrl = '----not-that-important----/recruits/my/?page='
+  // const previous = page === 1 ? null : `${baseUrl}${page - 1}`
+  // const next = page > 5 ? null : `${baseUrl}${page + 1}`
 
-  const status = String(req.query.condition ?? '')
-  const ordering = String(req.query.arrangement ?? '')
+  const status = String(req.query.status ?? '')
+  const ordering = String(req.query.ordering ?? 'created_at')
 
   const startIndex = (page - 1) * page_size
   const endIndex = startIndex + page_size
+
+  const summaryCounts = {
+    total: dummyRecruitManage.length,
+    open: dummyRecruitManage.filter((item) => item.is_closed === false).length,
+    closed: dummyRecruitManage.filter((item) => item.is_closed === true).length,
+  }
 
   const filteredRecruitsManageArray = dummyRecruitManage
     .filter((recruit) => {
@@ -151,9 +157,9 @@ recruitRouter.get('/my', async (req, res) => {
   )
 
   const response = {
-    count: filteredRecruitsManageArray.length,
-    previous,
-    next,
+    count: summaryCounts,
+    // previous,
+    // next,
     status,
     ordering,
     page,
