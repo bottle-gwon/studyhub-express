@@ -13,6 +13,7 @@ import dummyRecruitDetailBookmark from './dummy/dummyRecruitDetail/_dummyRecruit
 import fs from 'fs'
 import { dummyApplicantDetail } from './dummy/manageDeatilModal/_dummyApplicantDetail.js'
 import { penguinImageUrl } from '@/constants/imageUrls.js'
+import multer from 'multer'
 
 // /recruitments
 const recruitRouter = express.Router()
@@ -352,12 +353,23 @@ recruitRouter.get('/:recruitId/', async (req, res) => {
 // })
 // ---- 여기까지
 
-recruitRouter.post('/presigned-url', async (_req, res) => {
-  const response = {
-    status: 200,
-    message: 'Presigned URL 발급이 완료되었습니다.',
-    data: [
-      {
+const upload = multer({ dest: './uploads/' })
+recruitRouter.post(
+  '/presigned-url',
+  upload.array('files'),
+  async (req, res) => {
+    const files = req.files as File[] | undefined
+    console.log({ files })
+
+    if (!files) {
+      res.status(400).json({ message: 'failed' })
+      return
+    }
+
+    const response = {
+      status: 200,
+      message: 'Presigned URL 발급이 완료되었습니다.',
+      data: [...files].map(() => ({
         file_name: 'cover.png',
         key: 'uploads/studies/groups/images/uuid_cover.png',
         url: 'https://oz-bucket.s3.ap-northeast-2.amazonaws.com/',
@@ -368,11 +380,11 @@ recruitRouter.post('/presigned-url', async (_req, res) => {
         },
         file_url: penguinImageUrl,
         expires_in: 300,
-      },
-    ],
-  }
+      })),
+    }
 
-  res.status(200).json(response)
-})
+    res.status(200).json(response)
+  }
+)
 
 export default recruitRouter
