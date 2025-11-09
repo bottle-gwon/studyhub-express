@@ -11,6 +11,7 @@ import dummyRecruitDetailBase from './dummy/dummyRecruitDetail/_dummyRecruitDeta
 import type { RecruitDetail } from '@/interfaces/_recruitInterfaces.js'
 import dummyRecruitDetailBookmark from './dummy/dummyRecruitDetail/_dummyRecruitDetailBookmark.js'
 import fs from 'fs'
+import { dummyApplicantDetail } from './dummy/manageDeatilModal/_dummyApplicantDetail.js'
 
 // /recruitments
 const recruitRouter = express.Router()
@@ -201,6 +202,24 @@ recruitRouter.get('/:recruitment_id/applications', async (req, res) => {
   }
 
   res.status(200).json(response)
+})
+
+// 공고 지원자 상세 조회
+recruitRouter.get('/applications/:application_id', async (req, res) => {
+  const isLoggedIn = Boolean(req.headers.authorization)
+  if (!isLoggedIn) {
+    res.status(401).json({ detail: '로그인이 필요한 기능입니다.' })
+  }
+
+  const applicationId = Number(req.params.application_id)
+  const application = dummyApplicantDetail.find(
+    (application) => application.id === applicationId
+  )
+  if (!application) {
+    return res.status(404).json({ error: '데이터를 찾을 수 없습니다.' })
+  }
+
+  return res.status(200).json(application)
 })
 
 //북마크
