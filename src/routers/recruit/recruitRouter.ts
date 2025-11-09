@@ -125,13 +125,21 @@ recruitRouter.get('/:recruitment_id', async (req, res) => {
   const startIndex = (page - 1) * page_size
   const endIndex = startIndex + page_size
 
+  const user_id = Number(req.params.recruitment_id)
+  if (!Number.isFinite(user_id) || user_id <= 0) {
+    return res.status(400).json({ detail: '잘못된 요청입니다.' })
+  }
+  const sourceArray = dummyRecruitManage.filter(
+    (item) => Number(item.author?.id) === user_id
+  )
+
   const summaryCounts = {
-    total: dummyRecruitManage.length,
-    open: dummyRecruitManage.filter((item) => item.is_closed === false).length,
-    closed: dummyRecruitManage.filter((item) => item.is_closed === true).length,
+    total: sourceArray.length,
+    open: sourceArray.filter((item) => item.is_closed === false).length,
+    closed: sourceArray.filter((item) => item.is_closed === true).length,
   }
 
-  const filteredRecruitsManageArray = dummyRecruitManage
+  const filteredRecruitsManageArray = sourceArray
     .filter((recruit) => {
       if (status === 'open') return !recruit.is_closed
       if (status === 'closed') return recruit.is_closed
@@ -156,7 +164,7 @@ recruitRouter.get('/:recruitment_id', async (req, res) => {
     endIndex
   )
 
-  const baseUrl = `----not-that-important----/recruitments/:user_id/?status=${status ? status : ''}?ordering=${ordering}&page=`
+  const baseUrl = `/recruitments/${req.params.recruitment_id}?${status ? `status=${status}&` : ''}ordering=${ordering}&page_size=${page_size}&page=`
   const previous = page === 1 ? null : `${baseUrl}${page - 1}`
   const next = page > 5 ? null : `${baseUrl}${page + 1}`
 
