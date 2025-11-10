@@ -2,7 +2,7 @@ import type { Notification } from '@/interfaces/_notificationInterfaces.js'
 
 const dummyNotifications: Notification[] = [
   {
-    id: 0.4980920165516556,
+    id: 1,
     user_id: 2023,
     content:
       '📨 새로운 지원자가 있습니다! 김코딩님이 "JavaScript 마스터 되기" 스터디에 지원했어요. 자기소개: "Hello World가 제 첫사랑입니다 💕"',
@@ -13,18 +13,18 @@ const dummyNotifications: Notification[] = [
     updated_at: '2025-11-05T09:30:00Z',
   },
   {
-    id: 0.3665591500140033,
+    id: 2,
     user_id: 2024,
     content:
       '✅ 축하합니다! "React 훅스 완전정복" 스터디 신청이 승인되었습니다. 이제 useEffect 지옥에서 함께 놀아봐요!',
     type: 'APPLICATION_STATUS_APPROVAL',
-    is_read: false,
+    is_read: true,
     back_url_link: 'https://www.google.com',
     created_at: '2025-11-05T14:15:30Z',
     updated_at: '2025-11-05T14:20:00Z',
   },
   {
-    id: 0.9954074456021815,
+    id: 3,
     user_id: 2025,
     content:
       '❌ 아쉽게도 "백엔드 신들의 모임" 스터디 신청이 거절되었습니다. 아직 당신의 때가 아닌 것 같네요... 더 수련하고 오세요!',
@@ -35,18 +35,18 @@ const dummyNotifications: Notification[] = [
     updated_at: '2025-11-05T16:45:22Z',
   },
   {
-    id: 0.9327257041633925,
+    id: 4,
     user_id: 2026,
     content:
       '🎉 박개발님이 "알고리즘 정복단" 스터디에 새로 합류했습니다! 이제 Big O 표기법의 늪에서 함께 헤맬 동료가 생겼어요!',
     type: 'STUDY_MEMBER_JOINED',
-    is_read: false,
+    is_read: true,
     back_url_link: 'https://www.google.com',
     created_at: '2025-11-04T20:30:15Z',
     updated_at: '2025-11-04T21:00:00Z',
   },
   {
-    id: 0.5899447831662747,
+    id: 5,
     user_id: 2027,
     content:
       '👀 이준혁님이 당신의 코드 리뷰를 요청했습니다. 메시지: "이 코드가 왜 안되는지 정말 모르겠어요...  주제: "JOIN의 비밀 - 왜 이렇게 복잡하게 만들었을까?" 각오하세요!',
@@ -57,7 +57,7 @@ const dummyNotifications: Notification[] = [
     updated_at: '2025-11-05T11:25:00Z',
   },
   {
-    id: 0.7065456288495224,
+    id: 6,
     user_id: 2029,
     content:
       '⏰ 오늘 일정 알림: 오후 7시 "Python 뱀 길들이기" 스터디 모임이 있어요! 늦지 마세요~ (피자와 콜라 준비완료 🍕)',
@@ -68,18 +68,18 @@ const dummyNotifications: Notification[] = [
     updated_at: '2025-11-05T10:00:00Z',
   },
   {
-    id: 0.8664444807453535,
+    id: 7,
     user_id: 2030,
     content:
       '📝 최민수님이 "Node.js 정복기" 스터디에 새로운 기록을 작성했습니다. 제목: "콜백지옥 탈출기 - 내가 async/await를 만난 날"',
     type: 'STUDY_RECORD_CREATED',
-    is_read: true,
+    is_read: false,
     back_url_link: 'https://www.google.com',
     created_at: '2025-11-04T22:30:00Z',
     updated_at: '2025-11-05T08:00:00Z',
   },
   {
-    id: 0.2721702067713381,
+    id: 8,
     user_id: 2031,
     content:
       '🔧 시스템 점검 안내: 내일 새벽 2시-4시 서버 업그레이드를 진행합니다. 혹시 새벽에 코딩하시는 올빼미 개발자분들 참고하세요!',
@@ -90,15 +90,235 @@ const dummyNotifications: Notification[] = [
     updated_at: '2025-11-05T13:45:12Z',
   },
   {
-    id: 0.7304260891956178,
+    id: 9,
     user_id: 2032,
     content:
       '🎯 정소영님이 맞춤 메시지를 보냈습니다: "CSS Grid 마스터하고 나니 세상이 달라 보여요! 다들 화이팅! 💪"',
     type: 'CUSTOM',
-    is_read: true,
+    is_read: false,
     back_url_link: 'https://www.google.com',
     created_at: '2025-11-05T15:20:30Z',
     updated_at: '2025-11-05T15:25:15Z',
+  },
+  {
+    id: 10,
+    user_id: 2033,
+    content:
+      '🚀 "TypeScript 마스터하기" 스터디가 새로 개설되었습니다! 타입 안전성의 세계로 떠나볼까요?',
+    type: 'APPLICATION_CREATED',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T09:15:00Z',
+    updated_at: '2025-11-06T09:15:00Z',
+  },
+  {
+    id: 11,
+    user_id: 2034,
+    content:
+      '🎊 축하드립니다! "데이터베이스 설계 마스터" 스터디 승인이 완료되었습니다. 정규화의 늪에서 만나요!',
+    type: 'APPLICATION_STATUS_APPROVAL',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T10:30:00Z',
+    updated_at: '2025-11-06T10:30:00Z',
+  },
+  {
+    id: 12,
+    user_id: 2035,
+    content:
+      '😢 "고급 알고리즘 마스터" 스터디 신청이 거절되었습니다. 더 많은 준비가 필요할 것 같네요.',
+    type: 'APPLICATION_STATUS_REJECTION',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T11:45:00Z',
+    updated_at: '2025-11-06T11:45:00Z',
+  },
+  {
+    id: 13,
+    user_id: 2036,
+    content:
+      '🎯 강민정님이 "Vue.js 실전 프로젝트" 스터디에 합류했습니다! 이제 컴포넌트의 바다에서 함께 헤엄쳐요!',
+    type: 'STUDY_MEMBER_JOINED',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T13:20:00Z',
+    updated_at: '2025-11-06T13:20:00Z',
+  },
+  {
+    id: 14,
+    user_id: 2037,
+    content:
+      '⚡ 김해커님이 코드 리뷰를 요청했습니다. 메시지: "Promise 체이닝이 너무 복잡해졌어요... 도와주세요!"',
+    type: 'STUDY_SCHEDULE_UPCOMING',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T14:15:00Z',
+    updated_at: '2025-11-06T14:15:00Z',
+  },
+  {
+    id: 15,
+    user_id: 2038,
+    content:
+      '🔥 새로운 챌린지! "30일 코딩테스트 정복" 스터디에서 일일 문제 해결 챌린지가 시작됩니다!',
+    type: 'APPLICATION_CREATED',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T15:30:00Z',
+    updated_at: '2025-11-06T15:30:00Z',
+  },
+  {
+    id: 16,
+    user_id: 2039,
+    content:
+      '📚 이동욱님이 "Clean Code 읽기 모임" 스터디에 새로운 학습 자료를 공유했습니다!',
+    type: 'STUDY_RECORD_CREATED',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T16:45:00Z',
+    updated_at: '2025-11-06T16:45:00Z',
+  },
+  {
+    id: 17,
+    user_id: 2040,
+    content:
+      '💡 내일 오전 10시 "JavaScript 심화과정" 스터디에서 클로저와 스코프에 대해 깊이 파보는 시간을 가집니다!',
+    type: 'STUDY_SCHEDULE_UPCOMING',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T17:00:00Z',
+    updated_at: '2025-11-06T17:00:00Z',
+  },
+  {
+    id: 18,
+    user_id: 2041,
+    content:
+      '🌟 박성공님이 "React 고급 패턴" 스터디에서 첫 번째 프로젝트를 완성했습니다! 축하해주세요!',
+    type: 'STUDY_MEMBER_JOINED',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T18:30:00Z',
+    updated_at: '2025-11-06T18:30:00Z',
+  },
+  {
+    id: 19,
+    user_id: 2042,
+    content:
+      '🎮 "게임 개발 입문" 스터디에서 새로운 미니 게임 개발 프로젝트가 시작됩니다! 함께 만들어볼까요?',
+    type: 'APPLICATION_CREATED',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-06T19:15:00Z',
+    updated_at: '2025-11-06T19:15:00Z',
+  },
+  {
+    id: 20,
+    user_id: 2043,
+    content:
+      '📊 "데이터 분석 마스터" 스터디에서 오늘 배운 내용을 정리했습니다. 판다스는 정말 강력하네요!',
+    type: 'STUDY_RECORD_CREATED',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-05T20:00:00Z',
+    updated_at: '2025-11-05T20:30:00Z',
+  },
+  {
+    id: 21,
+    user_id: 2044,
+    content:
+      '🔍 "코드 리팩토링 마스터" 스터디 세션이 내일 오후 2시에 진행됩니다. 클린 코드의 비법을 배워보세요!',
+    type: 'STUDY_SCHEDULE_TODAY',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-05T21:15:00Z',
+    updated_at: '2025-11-05T21:15:00Z',
+  },
+  {
+    id: 22,
+    user_id: 2045,
+    content:
+      '🛠️ 서버 업데이트 완료: 새로운 기능들이 추가되었습니다! 실시간 채팅과 화면 공유 기능을 이용해보세요.',
+    type: 'SYSTEM',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-05T22:00:00Z',
+    updated_at: '2025-11-05T22:00:00Z',
+  },
+  {
+    id: 23,
+    user_id: 2046,
+    content:
+      '💪 홍길동님이 응원 메시지를 보냈습니다: "모든 개발자들 화이팅! 오늘도 한 줄의 코드가 내일의 기적을 만듭니다!"',
+    type: 'CUSTOM',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-05T23:30:00Z',
+    updated_at: '2025-11-05T23:30:00Z',
+  },
+  {
+    id: 24,
+    user_id: 2047,
+    content:
+      '🎓 "CS 기초 다지기" 스터디에서 오늘 운영체제 개념을 완전히 정복했습니다! 프로세스와 쓰레드의 차이점을 드디어 이해했어요.',
+    type: 'STUDY_RECORD_CREATED',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-04T19:45:00Z',
+    updated_at: '2025-11-04T20:15:00Z',
+  },
+  {
+    id: 25,
+    user_id: 2048,
+    content:
+      '🏆 "웹 퍼포먼스 최적화" 스터디에서 페이지 로딩 속도를 50% 개선하는 방법을 공유했습니다!',
+    type: 'STUDY_RECORD_CREATED',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-04T18:20:00Z',
+    updated_at: '2025-11-04T18:50:00Z',
+  },
+  {
+    id: 26,
+    user_id: 2049,
+    content:
+      '☕ "개발자 네트워킹" 스터디에서 오늘 오후 3시 커피챗이 예정되어 있습니다. 개발 경험담을 나누어요!',
+    type: 'STUDY_SCHEDULE_TODAY',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-04T14:30:00Z',
+    updated_at: '2025-11-04T14:30:00Z',
+  },
+  {
+    id: 27,
+    user_id: 2050,
+    content:
+      '🎨 김디자이너님이 "UI/UX 디자인 원칙" 스터디에 새로운 디자인 가이드를 업로드했습니다!',
+    type: 'STUDY_RECORD_CREATED',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-04T12:15:00Z',
+    updated_at: '2025-11-04T12:45:00Z',
+  },
+  {
+    id: 28,
+    user_id: 2051,
+    content:
+      '🔐 보안 업데이트: 새로운 보안 패치가 적용되었습니다. 2단계 인증 설정을 권장합니다.',
+    type: 'SYSTEM',
+    is_read: true,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-04T11:00:00Z',
+    updated_at: '2025-11-04T11:00:00Z',
+  },
+  {
+    id: 29,
+    user_id: 2052,
+    content:
+      '💝 이감사님이 메시지를 보냈습니다: "모든 스터디원들께 감사드려요! 함께 성장하는 기쁨을 느끼고 있습니다!"',
+    type: 'CUSTOM',
+    is_read: false,
+    back_url_link: 'https://www.google.com',
+    created_at: '2025-11-04T10:30:00Z',
+    updated_at: '2025-11-04T10:30:00Z',
   },
 ]
 
