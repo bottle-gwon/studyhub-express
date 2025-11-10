@@ -422,4 +422,31 @@ recruitRouter.post(
   }
 )
 
+recruitRouter.post('/', upload.array('attachments'), async (req, res) => {
+  const files = req.files as File[] | undefined
+
+  if (files) {
+    // NOTE: 터미널에서 로그를 확인해주세요
+    console.log({ files })
+  }
+
+  res.status(200).json({ id: 101 })
+})
+
+recruitRouter.patch(
+  '/:recruitId',
+  upload.array('attachments'),
+  async (req, res) => {
+    const recruitId = Number(req.params.recruitId ?? 0)
+    const files = req.files as File[] | undefined
+
+    if (files) {
+      // NOTE: 터미널에서 로그를 확인해주세요
+      console.log({ files })
+    }
+
+    res.status(200).json({ id: recruitId })
+  }
+)
+
 export default recruitRouter

@@ -47,7 +47,6 @@ lecturesRouter.get('/', async (req, res) => {
           return 1 // 그 외엔 넘어감
       }
     })
-  console.log({ filteredArray })
   const slicedLectureArray = filteredArray.slice(page * 3, (page + 1) * 3)
 
   const response = {
@@ -122,10 +121,7 @@ lecturesRouter.delete('/bookmarks/:lecture_id', async (req, res) => {
   return
 })
 
-lecturesRouter.get('/:lectureId/reviews', async (req, res) => {
-  const lectureId = req.params.lectureId
-  console.log({ lectureId })
-
+lecturesRouter.get('/:lectureId/reviews', async (_req, res) => {
   const reviews: LectureReview[] = [
     {
       id: 1,
