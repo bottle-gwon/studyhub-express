@@ -12,6 +12,7 @@ import type { RecruitDetail } from '@/interfaces/_recruitInterfaces.js'
 import dummyRecruitDetailBookmark from './dummy/dummyRecruitDetail/_dummyRecruitDetailBookmark.js'
 import fs from 'fs'
 import { dummyApplicantDetail } from './dummy/manageDeatilModal/_dummyApplicantDetail.js'
+import { penguinImageUrl } from '@/constants/imageUrls.js'
 
 // /recruitments
 const recruitRouter = express.Router()
@@ -350,5 +351,28 @@ recruitRouter.get('/:recruitId/', async (req, res) => {
 //   res.status(200).json(response)
 // })
 // ---- 여기까지
+
+recruitRouter.post('/presigned-url', async (_req, res) => {
+  const response = {
+    status: 200,
+    message: 'Presigned URL 발급이 완료되었습니다.',
+    data: [
+      {
+        file_name: 'cover.png',
+        key: 'uploads/studies/groups/images/uuid_cover.png',
+        url: 'https://oz-bucket.s3.ap-northeast-2.amazonaws.com/',
+        fields: {
+          key: 'uploads/studies/groups/images/uuid_cover.png',
+          policy: 'eyJleHBpcmF0aW9uIjoiMjAyNS0xMC0xNlQwOTozMzo0OVoi...',
+          'x-amz-signature': 'e3b29f...',
+        },
+        file_url: penguinImageUrl,
+        expires_in: 300,
+      },
+    ],
+  }
+
+  res.status(200).json(response)
+})
 
 export default recruitRouter
