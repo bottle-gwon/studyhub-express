@@ -14,6 +14,7 @@ import fs from 'fs'
 import { dummyApplicantDetail } from './dummy/manageDeatilModal/_dummyApplicantDetail.js'
 import { penguinImageUrl } from '@/constants/imageUrls.js'
 import multer from 'multer'
+import { sleep } from '../utils/sleep.js'
 
 // /recruitments
 const recruitRouter = express.Router()
@@ -423,6 +424,7 @@ recruitRouter.post(
 )
 
 recruitRouter.post('/', upload.array('attachments'), async (req, res) => {
+  await sleep(1000)
   const files = req.files as File[] | undefined
 
   if (files) {
@@ -437,6 +439,7 @@ recruitRouter.patch(
   '/:recruitId',
   upload.array('attachments'),
   async (req, res) => {
+    await sleep(1000)
     const recruitId = Number(req.params.recruitId ?? 0)
     const files = req.files as File[] | undefined
 
