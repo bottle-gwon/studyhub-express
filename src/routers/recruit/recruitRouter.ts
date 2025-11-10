@@ -108,7 +108,7 @@ recruitRouter.post('/tags', async (req, res) => {
 })
 
 //---- 공고관리 페이지 ----
-recruitRouter.get('/:recruitment_id', async (req, res) => {
+recruitRouter.get('/user/:user_id', async (req, res) => {
   // 브라우저에서 테스트 시 해당부분 주석
   // const isLoggedIn = Boolean(req.headers.authorization)
 
@@ -125,7 +125,7 @@ recruitRouter.get('/:recruitment_id', async (req, res) => {
   const startIndex = (page - 1) * page_size
   const endIndex = startIndex + page_size
 
-  const user_id = Number(req.params.recruitment_id)
+  const user_id = Number(req.params.user_id)
   if (!Number.isFinite(user_id) || user_id <= 0) {
     return res.status(400).json({ detail: '잘못된 요청입니다.' })
   }
@@ -164,7 +164,7 @@ recruitRouter.get('/:recruitment_id', async (req, res) => {
     endIndex
   )
 
-  const baseUrl = `----not-that-important----/recruitments/${req.params.recruitment_id}?${status ? `status=${status}&` : ''}ordering=${ordering}&page_size=${page_size}&page=`
+  const baseUrl = `----not-that-important----/recruitments/user/${req.params.user_id}?${status ? `status=${status}&` : ''}ordering=${ordering}&page_size=${page_size}&page=`
   const previous = page === 1 ? null : `${baseUrl}${page - 1}`
   const next = page > 5 ? null : `${baseUrl}${page + 1}`
 
