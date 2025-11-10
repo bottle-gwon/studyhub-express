@@ -270,8 +270,8 @@ recruitRouter.get('/applications/:application_id', async (req, res) => {
 // })
 
 //카드삭제
-recruitRouter.delete('/:id', async (req, res) => {
-  const manage_id = Number(req.params.id)
+recruitRouter.delete('/:recruitment_id', async (req, res) => {
+  const manage_id = Number(req.params.recruitment_id)
   if (!Number.isFinite(manage_id)) {
     return res.status(400).json({ detail: '잘못된 요청입니다.' })
   }
@@ -281,25 +281,14 @@ recruitRouter.delete('/:id', async (req, res) => {
   )
 
   if (targetManage === -1) {
-    res.status(400).json({
-      detail: '잘못된 요청입니다.',
+    res.status(404).json({
+      detail: '존재하지 않는 공고입니다.',
     })
     return
   }
 
-  const removed = dummyRecruitManage.splice(targetManage, 1)[0]
-  if (!removed) {
-    res.status(400).json({
-      detail: '잘못된 요청입니다.',
-    })
-    return
-  }
-
-  res.status(200).json({
-    id: removed.id,
-    title: removed.title,
-    deleted_at: new Date().toISOString(),
-  })
+  dummyRecruitManage.splice(targetManage, 1)
+  res.sendStatus(204)
   return
 })
 
