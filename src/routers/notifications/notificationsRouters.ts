@@ -11,6 +11,7 @@ notificationsRouter.get('/', async (req, res) => {
   await sleep(1000)
 
   const page = Number(req.query.page ?? 1)
+  const page_size = Number(req.query.page_size ?? 5)
   const is_read = req.query.is_read
     ? req.query.is_read === 'true'
       ? true
@@ -20,16 +21,22 @@ notificationsRouter.get('/', async (req, res) => {
   const filteredDummy = dummyNotifications.filter((notification) =>
     is_read === null ? true : notification.is_read === is_read
   )
+  const slicedDummy = filteredDummy.slice(
+    (page - 1) * page_size,
+    page * page_size
+  )
 
+  const count = filteredDummy.length
+  const totalPage = Math.ceil(count / page_size)
   const baseUrl = `----not-that-important----/notifications/?is_read=${is_read ? is_read : ''}&page=`
   const previous = page === 1 ? null : `${baseUrl}${page - 1}`
-  const next = page > 5 ? null : `${baseUrl}${page + 1}`
+  const next = page > totalPage ? null : `${baseUrl}${page + 1}`
 
   const response: NotificationsResponseData = {
     count: filteredDummy.length,
     previous,
     next,
-    results: filteredDummy,
+    results: slicedDummy,
   }
 
   res.status(200).json(response)
