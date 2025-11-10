@@ -11,7 +11,7 @@ export interface Applicant {
   created_at: string
 }
 
-export type ApplicantStatus = 'pending' | 'accepted' | 'rejected'
+export type ApplicantStatus = 'PENDING' | 'ACCEPTED' | 'REJECTED'
 
 export interface ApplicantListResponse {
   count: number
