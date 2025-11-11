@@ -232,6 +232,44 @@ recruitRouter.get('/applications/:application_id', async (req, res) => {
   return res.status(200).json(application)
 })
 
+// 지원자 승인/거절 통합 API
+recruitRouter.post('/applications/:application_id', async (req, res) => {
+  const isLoggedIn = Boolean(req.headers.authorization)
+  if (!isLoggedIn) {
+    return res.status(401).json({ detail: '권한이 없습니다.' })
+  }
+
+  const applicationId = Number(req.params.application_id)
+  const application = dummyApplicantDetail.find(
+    (applicant) => applicant.id === applicationId
+  )
+
+  const { status } = req.body
+
+  if (!application) {
+    return res.status(404).json({ error: '지원 내역을 찾을 수 없습니다.' })
+  }
+
+  if (application.status !== 'PENDING') {
+    return res
+      .status(400)
+      .json({ error: '이미 승인되거나 거절된 지원 내역입니다.' })
+  }
+
+  dummyApplicantDetail[applicationId] = { ...application, status: status }
+
+  console.log(dummyApplicantDetail[applicationId])
+
+  const updatedApplication = {
+    application_id: applicationId,
+    status: status,
+    approved_at: new Date().toISOString(),
+    member_registered: status ? true : false,
+  }
+
+  return res.status(200).json(updatedApplication)
+})
+
 // //북마크
 // recruitRouter.post('/:id/bookmark', async (req, res) => {
 //   const manage_id = Number(req.params.id)
