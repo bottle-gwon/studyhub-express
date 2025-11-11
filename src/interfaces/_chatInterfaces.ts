@@ -1,13 +1,9 @@
 export interface ChatRoomListItem {
-  id: number
-  study_name: string
-  sender_id: number
-  message_counter: number
-  sender_nickname: string
-  study_group_id: number
-  content: string
-  file_url: string | null
-  is_read: boolean
+  uuid: string
+  name: string
+  unread_message_count: number
+  last_message_sender_nickname: string
+  last_message_content: string
   created_at: string
 }
 export interface Message {
