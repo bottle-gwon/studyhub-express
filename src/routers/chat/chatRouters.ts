@@ -59,7 +59,7 @@ chatRouter.get('/chatrooms/:study_group_uuid/messages', async (req, res) => {
   const response = {
     status: 'success',
     code: 'SUCCESS',
-    message: '메시지 검색 결과 조회 성공',
+    message: '메시지 목록 조회 성공',
     data: {
       messages: result,
       pagination: {
