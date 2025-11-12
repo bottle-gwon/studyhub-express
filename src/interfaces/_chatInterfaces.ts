@@ -19,3 +19,8 @@ export interface Message {
   // sender_id: number
   created_at: string
 }
+
+export interface ClientMessage {
+  type: string
+  content: string
+}
