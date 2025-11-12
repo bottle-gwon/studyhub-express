@@ -7,6 +7,7 @@ import recruitRouter from './routers/recruit/recruitRouter.js'
 import notificationsRouter from './routers/notifications/notificationsRouters.js'
 import chatRouter from './routers/chat/chatRouters.js'
 import studiesRouter from './routers/study/studyRouter.js'
+import ChatSocket from './routers/chat/chatRoomSocket.js'
 
 const app = express()
 app.use(express.json())
@@ -33,4 +34,7 @@ app.use('/studies', studiesRouter)
 app.use('/chat', chatRouter)
 app.use('/', healthRouter) // NOTE: 이 라우터는 가장 마지막에 있어야 합니다
 
-app.listen(3000, () => console.log('----server is on 3000'))
+const server = app.listen(3000, () => console.log('----server is on 3000'))
+
+// 웹 소켓
+ChatSocket(server)
