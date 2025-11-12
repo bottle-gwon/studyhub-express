@@ -22,14 +22,15 @@ chatRouter.get('/chatrooms', async (_, res) => {
     status: 'success',
     code: 'SUCCESS',
     message: '채팅방 목록 조회 성공',
-    data: {
-      messages: result,
-      // pagination: {
-      //   page: page,
-      //   page_size: page_size,
-      //   total_count: dummyRoom.length,
-      // },
-    },
+    data: result,
+    // {
+    //   messages: result,
+    //   // pagination: {
+    //   //   page: page,
+    //   //   page_size: page_size,
+    //   //   total_count: dummyRoom.length,
+    //   // },
+    // },
   }
   await new Promise((resolve) => setTimeout(resolve, 1000))
 
@@ -61,7 +62,11 @@ chatRouter.get('/chatrooms/:study_group_uuid/messages', async (req, res) => {
     message: '메시지 검색 결과 조회 성공',
     data: {
       messages: result,
-      total_count: dummyArray.length,
+      pagination: {
+        page: page,
+        page_size: page_size,
+        total_count: dummyArray.length,
+      },
     },
   }
   await new Promise((resolve) => setTimeout(resolve, 1000))
